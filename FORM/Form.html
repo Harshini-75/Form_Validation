@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form | Validation</title>
+    <style>
+        body {
+            background-image: url('https://completeprojectresource.com/wp-content/uploads/2018/03/contact-us-form-background.jpg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center center;
+            margin: 0;
+        }
+
+        #box {
+            width: 500px;
+            height: 600px;
+            margin: 65px 0px 0px 465px;
+            border: 1px solid #7a7878;
+            background-color: rgba(255, 255, 255, 0.1);
+            
+        }
+
+        label {
+            padding: 0px 0px 50px 80px;
+            height: 15px;
+            color: white;
+        }
+
+        input {
+            margin: 10px 0px 10px 80px;
+            border-radius: 5px;
+            border: 1px solid black;
+            width: 350px;
+            height: 40px;
+            text-indent: 10px;
+        }
+
+        button {
+            padding: 10px 50px 10px 50px;
+            border-radius: 8px;
+            margin: 20px 0px 0px 180px;
+            background-color: white;
+            border: 1px solid black;
+        }
+
+        #space {
+            padding-top: 20px;
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <form id="box"  onsubmit="return validateForm()">
+        <div id="space"></div>
+        <label id="name">Name</label> <br>
+        <input placeholder="Enter Your Name" type="text" id="nameInput" required><br>
+        <label id="dob">Date of Birth</label><br>
+        <input placeholder="DD/MM/YYYY" id="dobInput" required><br>
+        <label id="phone">Mobile Number</label><br>
+        <input id="phoneInput" required><br>
+        <label id="email">Email</label><br>
+        <input placeholder="xyz@gmail.com" id="emailInput" required><br>
+        <label id="pass">password</label><br>
+        <input placeholder="8-characters" id="passInput" type="password" required><br>
+        <label id="re-pass">Confirm Password</label><br>
+        <input placeholder="8-characters" id="rePassInput" type="password" required><br>
+       
+        <button type="submit" id="btn">Submit</button>
+    </form>
+
+
+    <script>
+        function validateForm() {
+            var name = document.getElementById('nameInput').value;
+            var dob = document.getElementById('dobInput').value;
+            var phone = document.getElementById('phoneInput').value;
+            var email = document.getElementById('emailInput').value;
+            var pass = document.getElementById('passInput').value;
+            var rePass = document.getElementById('rePassInput').value;
+            if (name === "" || dob === "" || phone === "" || email === "" || pass === "" || rePass === "") {
+                alert("All fields are required.");
+                return false;
+            }
+
+
+            var phoneRegex = /^[789]\d{9}$/;
+            if (!phoneRegex.test(phone)) {
+                alert("Invalid Mobile Number Format");
+                return false;
+            }
+            var dobRegex = /^(0[1-9]|[1-2][0-9]|3[0-1])\/(0[1-9]|1[0-2])\/\d{4}$/;
+            if (!dobRegex.test(dob)) {
+                alert("Invalid Date of Birth format. Please use DD/MM/YYYY.");
+                return false;
+            }
+            var emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9-]+\.[com]/;
+            if (!emailRegex.test(email)) {
+                alert("Invalid email format.");
+                return false;
+            }
+            if (pass.length < 8) {
+                alert("Password must be at least 8 characters long.");
+                return false;
+            }
+            if (pass !== rePass) {
+                alert("Passwords do not match.");
+                return false;
+            }
+            alert("Form Sumitted");
+            return true;
+        }
+    </script>
+</body>
+
+</html>
